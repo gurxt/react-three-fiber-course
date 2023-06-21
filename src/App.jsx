@@ -24,6 +24,7 @@ const App = () => {
         minPolarAngle={Math.PI / 6}
         maxPolarAngle={Math.PI - Math.PI / 6}
       />
+      <axesHelper args={[3]} />
       <Stats />
     </Canvas>
   )

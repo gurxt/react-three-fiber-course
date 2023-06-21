@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import * as THREE from 'three'
 
 const Polyhedron = ({ position, polyhedron }) => {
   const ref = useRef()
@@ -20,6 +19,7 @@ const Polyhedron = ({ position, polyhedron }) => {
       onPointerDown={() => setCount((count + 1) % 3)}
     > 
       <meshBasicMaterial color='red' wireframe />
+      <axesHelper args={[0.5]} />
     </mesh>
   )
 }
