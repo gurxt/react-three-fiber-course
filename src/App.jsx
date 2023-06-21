@@ -1,33 +1,53 @@
 import { Canvas } from '@react-three/fiber'
 import Polyhedron from './Polyhedron'
 import * as THREE from 'three'
-import { OrbitControls, Stats } from '@react-three/drei'
+import { useMemo } from 'react'
+import { Stats, OrbitControls } from '@react-three/drei'
+import { useControls } from 'leva'
 
-const App = () => {
-  const polyhedron = [
-    new THREE.BoxGeometry(),
-    new THREE.SphereGeometry(0.65),
-    new THREE.DodecahedronGeometry(0.65)
-  ]
+export default function App() {
+  const polyhedron = useMemo(
+    () => [
+      new THREE.BoxGeometry(),
+      new THREE.SphereGeometry(0.785398),
+      new THREE.DodecahedronGeometry(0.785398),
+    ],
+    []
+  )
+
+  const options = useMemo(() => {
+    return {
+      x: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      y: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      z: { value: 0, min: 0, max: Math.PI * 2, step: 0.01 },
+      visible: true,
+      color: { value: 'lime' },
+    }
+  }, [])
+
+  const pA = useControls('Polyhedron A', options)
+  const pB = useControls('Polyhedron B', options)
 
   return (
-    <Canvas camera={{ position: [0, 0, 3] }}>
-      <Polyhedron position={[-0.75, -0.75, 0]} polyhedron={polyhedron} />
-      <Polyhedron position={[0.75, -0.75, 0]} polyhedron={polyhedron} />
-      <Polyhedron position={[-0.75, 0.75, 0]} polyhedron={polyhedron} />
-      <Polyhedron position={[0.75, 0.75, 0]} polyhedron={polyhedron} />
-      <OrbitControls 
-        enableDamping={true} 
-        enablePan={false} 
-        minAzimuthAngle={-Math.PI / 4}
-        maxAzimuthAngle={Math.PI / 4}
-        minPolarAngle={Math.PI / 6}
-        maxPolarAngle={Math.PI - Math.PI / 6}
+    <Canvas camera={{ position: [1, 2, 3] }}>
+      <Polyhedron
+        position={[-1, 1, 0]}
+        rotation={[pA.x, pA.y, pA.z]}
+        visible={pA.visible}
+        color={pA.color}
+        polyhedron={polyhedron}
       />
-      <axesHelper args={[3]} />
+      <Polyhedron
+        position={[1, 1, 0]}
+        rotation={[pB.x, pB.y, pB.z]}
+        visible={pB.visible}
+        color={pB.color}
+        polyhedron={polyhedron}
+      />
+      <OrbitControls target-y={1} />
+      <axesHelper args={[5]} />
+      <gridHelper />
       <Stats />
     </Canvas>
   )
 }
-
-export default App
