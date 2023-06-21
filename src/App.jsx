@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import Polyhedron from './Polyhedron'
 import * as THREE from 'three'
-import { Stats } from '@react-three/drei'
+import { OrbitControls, Stats } from '@react-three/drei'
 
 const App = () => {
   const polyhedron = [
@@ -16,6 +16,14 @@ const App = () => {
       <Polyhedron position={[0.75, -0.75, 0]} polyhedron={polyhedron} />
       <Polyhedron position={[-0.75, 0.75, 0]} polyhedron={polyhedron} />
       <Polyhedron position={[0.75, 0.75, 0]} polyhedron={polyhedron} />
+      <OrbitControls 
+        enableDamping={true} 
+        enablePan={false} 
+        minAzimuthAngle={-Math.PI / 4}
+        maxAzimuthAngle={Math.PI / 4}
+        minPolarAngle={Math.PI / 6}
+        maxPolarAngle={Math.PI - Math.PI / 6}
+      />
       <Stats />
     </Canvas>
   )
