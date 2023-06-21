@@ -95,12 +95,26 @@ function Lights() {
     },
   })
 
+  const LightBulb = () => (
+    <mesh>
+      <sphereGeometry args={[0.25]} />
+    </mesh>
+  )
+
   return (
     <>
-      <ambientLight ref={ambientRef} />
-      <directionalLight ref={directionalRef} />
-      <pointLight ref={pointRef} />
-      <spotLight ref={spotRef} />
+      <ambientLight ref={ambientRef}>
+        <LightBulb />
+      </ambientLight>
+      <directionalLight ref={directionalRef}>
+        <LightBulb />
+      </directionalLight>
+      <pointLight ref={pointRef}>
+        <LightBulb />
+      </pointLight>
+      <spotLight ref={spotRef}>
+        <LightBulb />
+      </spotLight>
     </>
   )
 }
@@ -113,7 +127,7 @@ export default function App() {
         name="meshBasicMaterial"
         position={[-3, 1, 0]}
         material={
-          new THREE.MeshBasicMaterial({ color: 'yellow', flatShading: true })
+          new THREE.MeshBasicMaterial({ color: 'yellow' })
         }
       />
       <Polyhedron
