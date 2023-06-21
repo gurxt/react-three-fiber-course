@@ -1,35 +1,33 @@
-import { /*useEffect*/ useRef } from 'react'
+import { useRef, useState, useEffect, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
+import * as THREE from 'three'
 
 const Box = ({ position, name }) => {
+  const [rotate, setRotate] = useState(false)
   const ref = useRef()
+  const geometry = useMemo(() => new THREE.BoxGeometry(), [])
 
-  // state can be imported instead of _
+  useEffect(() => {
+    console.log(ref.current.geometry.uuid)
+  }, [rotate])
+
   useFrame((_, delta) => {
-    ref.current.rotation.x += 1 * delta
-    ref.current.rotation.y += 0.5 * delta
-    //ref.current.position.y = Math.sin(state.clock.getElapsedTime() * 4 / 2)
+    if (rotate) {
+      ref.current.rotation.x += delta * rotate
+      ref.current.rotation.y += delta * rotate
+    }
   })
 
-  /*
-  useEffect(() => {
-    console.log(ref) 
-  }, [])
-  */
-
   return (
-    <mesh 
-      ref={ref} 
+    <mesh
+      ref={ref}
       position={position}
       name={name}
-      onPointerDown={(e) => console.log(`Pointer down: ${e.object.name}`)}
-      onPointerUp={(e) => console.log(`Pointer up: ${e.object.name}`)}
-      onPointerOver={(e) => console.log(`Pointer over: ${e.object.name}`)}
-      onPointerOut={(e) => console.log(`Pointer out: ${e.object.name}`)}
-      onUpdate={(e) => console.log(e)}
-    >
+      geometry={geometry}
+      onPointerDown={() => setRotate(!rotate)}
+    > 
       <boxGeometry />
-      <meshBasicMaterial color="red" wireframe />
+      <meshBasicMaterial color='red' wireframe />
     </mesh>
   )
 }
