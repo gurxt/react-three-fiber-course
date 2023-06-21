@@ -1,17 +1,10 @@
-//import React from 'react'
 import ReactDOM from 'react-dom/client'
-//import App from './App.jsx'
-import { Canvas } from '@react-three/fiber'
-import './styles.css'
+import App from './App.jsx'
 import { StrictMode } from 'react'
+import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Canvas camera={{ position: [0, 0, 2]}}>
-      <mesh>
-        <boxGeometry />
-        <meshBasicMaterial color="red" wireframe />
-      </mesh>
-    </Canvas>
+    <App />
   </StrictMode>
 )
