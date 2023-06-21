@@ -1,6 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import Polyhedron from './Polyhedron'
 import * as THREE from 'three'
+import { Stats } from '@react-three/drei'
 
 const App = () => {
   const polyhedron = [
@@ -15,6 +16,7 @@ const App = () => {
       <Polyhedron position={[0.75, -0.75, 0]} polyhedron={polyhedron} />
       <Polyhedron position={[-0.75, 0.75, 0]} polyhedron={polyhedron} />
       <Polyhedron position={[0.75, 0.75, 0]} polyhedron={polyhedron} />
+      <Stats />
     </Canvas>
   )
 }
