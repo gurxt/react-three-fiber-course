@@ -2,6 +2,7 @@
 import { Stats, OrbitControls, Circle } from '@react-three/drei'
 import { Canvas, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+// hello
 
 export default function App() {
   const gltf = useLoader(GLTFLoader, './shrine_of_the_oracle/scene.gltf')
