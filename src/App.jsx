@@ -6,7 +6,7 @@ import { useControls } from 'leva'
 
 const Models = [
   { title: 'Wednesday', url: './wednesday.glb' },
-  { title: 'Hammer', url: './hammer.glb' }
+  { title: 'Kitty', url: './kitty.glb' }
 ]
 
 function Model({ url }) {
